@@ -14,7 +14,7 @@ interface PublicSetupProps {
 
 export default function PublicSetup({ children }: PublicSetupProps) {
     return (
-        <div className="relative min-h-screen flex flex-col">
+        <div className="relative min-h-screen bg-blue-300/20 flex flex-col">
 
             <NavbarContainer>
                 <Navbar />

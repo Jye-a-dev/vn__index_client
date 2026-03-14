@@ -23,12 +23,12 @@ const sections = [
 
 export default function PublicFooter() {
   return (
-    <footer className="bg-gray-900 text-gray-300 mt-20">
+    <footer className="bg-gray-900 rounded-2xl text-gray-300 mt-20">
       <div className="max-w-7xl mx-auto px-6 py-12 grid md:grid-cols-3 gap-10">
 
         <FooterBrand />
 
-        {sections.map((section) => (
+        {sections.map((section) => (  
           <div key={section.title}>
             <h3 className="text-white font-semibold mb-4">
               {section.title}

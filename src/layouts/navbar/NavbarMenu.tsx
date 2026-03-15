@@ -14,7 +14,7 @@ export default function NavbarMenu() {
         <li key={item.name}>
           <Link
             href={item.href}
-            className="hover:text-blue-600 border-2 border-white p-2 rounded-2xl bg-white/20 transition"
+            className="hover:text-blue-600 border-2 border-white p-2 rounded-2xl bg-white transition"
           >
             {item.name}
           </Link>

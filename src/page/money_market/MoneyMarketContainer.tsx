@@ -7,7 +7,20 @@ import ExchangeRateSection from "./ExchangeRateSection";
 import MoneySupplySection from "./MoneySupplySection";
 import DepositRateSection from "./DepositRateSection";
 
-type Section = "policy" | "exchange" | "money" | "deposit";
+import FuelPriceSection from "./FuelPriceSection";
+import GoldPriceSection from "./GoldPriceSection";
+import GlobalCommoditySection from "./GlobalCommoditySection";
+import DomesticCommoditySection from "./DomesticCommoditySection";
+
+type Section =
+  | "policy"
+  | "exchange"
+  | "money"
+  | "deposit"
+  | "fuel"
+  | "gold"
+  | "globalCommodity"
+  | "domesticCommodity";
 
 export default function MoneyMarketContainer() {
 
@@ -27,11 +40,11 @@ export default function MoneyMarketContainer() {
       </h1>
 
       {/* SECTION SWITCH */}
-      <div className="flex gap-2">
+      <div className="flex flex-wrap gap-2">
 
         <button
           onClick={() => setActiveSection("policy")}
-          className={`px-4 py-2 rounded-lg border cursor-pointer
+          className={`px-4 py-2 rounded-lg border
           ${activeSection === "policy"
             ? "bg-blue-600 text-white"
             : "bg-gray-100 hover:bg-gray-200"}`}
@@ -41,7 +54,7 @@ export default function MoneyMarketContainer() {
 
         <button
           onClick={() => setActiveSection("exchange")}
-          className={`px-4 py-2 rounded-lg border cursor-pointer
+          className={`px-4 py-2 rounded-lg border
           ${activeSection === "exchange"
             ? "bg-blue-600 text-white"
             : "bg-gray-100 hover:bg-gray-200"}`}
@@ -51,7 +64,7 @@ export default function MoneyMarketContainer() {
 
         <button
           onClick={() => setActiveSection("money")}
-          className={`px-4 py-2 rounded-lg border cursor-pointer
+          className={`px-4 py-2 rounded-lg border
           ${activeSection === "money"
             ? "bg-blue-600 text-white"
             : "bg-gray-100 hover:bg-gray-200"}`}
@@ -61,7 +74,7 @@ export default function MoneyMarketContainer() {
 
         <button
           onClick={() => setActiveSection("deposit")}
-          className={`px-4 py-2 rounded-lg border cursor-pointer
+          className={`px-4 py-2 rounded-lg border
           ${activeSection === "deposit"
             ? "bg-blue-600 text-white"
             : "bg-gray-100 hover:bg-gray-200"}`}
@@ -69,12 +82,51 @@ export default function MoneyMarketContainer() {
           Deposit Rates
         </button>
 
+        <button
+          onClick={() => setActiveSection("fuel")}
+          className={`px-4 py-2 rounded-lg border
+          ${activeSection === "fuel"
+            ? "bg-blue-600 text-white"
+            : "bg-gray-100 hover:bg-gray-200"}`}
+        >
+          Fuel Price
+        </button>
+
+        <button
+          onClick={() => setActiveSection("gold")}
+          className={`px-4 py-2 rounded-lg border
+          ${activeSection === "gold"
+            ? "bg-blue-600 text-white"
+            : "bg-gray-100 hover:bg-gray-200"}`}
+        >
+          Gold Price
+        </button>
+
+        <button
+          onClick={() => setActiveSection("globalCommodity")}
+          className={`px-4 py-2 rounded-lg border
+          ${activeSection === "globalCommodity"
+            ? "bg-blue-600 text-white"
+            : "bg-gray-100 hover:bg-gray-200"}`}
+        >
+          Global Commodity
+        </button>
+
+        <button
+          onClick={() => setActiveSection("domesticCommodity")}
+          className={`px-4 py-2 rounded-lg border
+          ${activeSection === "domesticCommodity"
+            ? "bg-blue-600 text-white"
+            : "bg-gray-100 hover:bg-gray-200"}`}
+        >
+          Domestic Commodity
+        </button>
+
       </div>
 
       {/* FILTER BAR */}
       <div className="flex flex-wrap items-center gap-4 bg-white border rounded-xl p-4">
 
-        {/* Deposit tenor chỉ dùng cho deposit */}
         {activeSection === "deposit" && (
           <div className="flex items-center gap-2">
             <span className="text-sm font-medium">
@@ -96,7 +148,6 @@ export default function MoneyMarketContainer() {
           </div>
         )}
 
-        {/* Pagination chỉ dùng cho API có page */}
         {activeSection !== "deposit" && (
           <>
             <div className="flex items-center gap-2">
@@ -160,6 +211,22 @@ export default function MoneyMarketContainer() {
 
       {activeSection === "deposit" && (
         <DepositRateSection kyHan={depositTenor} />
+      )}
+
+      {activeSection === "fuel" && (
+        <FuelPriceSection />
+      )}
+
+      {activeSection === "gold" && (
+        <GoldPriceSection/>
+      )}
+
+      {activeSection === "globalCommodity" && (
+        <GlobalCommoditySection page={page} limit={limit} />
+      )}
+
+      {activeSection === "domesticCommodity" && (
+        <DomesticCommoditySection page={page} limit={limit} />
       )}
 
     </div>

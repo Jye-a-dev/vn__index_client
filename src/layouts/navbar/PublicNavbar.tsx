@@ -5,7 +5,7 @@ import NavbarMenu from "./NavbarMenu";
 
 export default function PublicNavbar() {
   return (
-    <nav className="w-full border-b bg-black/40 rounded-2xl backdrop-blur-md sticky top-0 z-50">
+    <nav className="w-full border-b bg-zinc-200/40 rounded-2xl backdrop-blur-md sticky top-0 z-50">
       <div className="max-w-7xl mx-auto flex items-center justify-between px-6 py-3">
 
         <NavbarLogo />

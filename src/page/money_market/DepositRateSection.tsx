@@ -2,6 +2,7 @@
 
 import { VN_BANKS } from "@/constants/vnBanks";
 import { useDepositRates } from "@/hooks/money/useDepositRates";
+import { DEPOSIT_RATE_DATASET } from "@/constants/depositRateDataset";
 
 type Props = {
   kyHan: number;
@@ -32,7 +33,9 @@ export default function DepositRateSection({ kyHan }: Props) {
           const apiBank = rateMap.get(bank.api_code);
 
           const latestRate =
-            apiBank?.data?.[0]?.[1] ?? "N/A";
+            apiBank?.data?.[0]?.[1] ??
+            DEPOSIT_RATE_DATASET[bank.code] ??
+            "N/A";
 
           return (
             <div
@@ -49,7 +52,7 @@ export default function DepositRateSection({ kyHan }: Props) {
               </div>
 
               <div className="mt-2 text-lg font-medium">
-                Latest Rate: {latestRate}%
+                Tỷ lệ gần nhất: {latestRate}%
               </div>
 
             </div>

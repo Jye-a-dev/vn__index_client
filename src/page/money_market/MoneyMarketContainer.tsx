@@ -31,7 +31,7 @@ export default function MoneyMarketContainer() {
 
         <button
           onClick={() => setActiveSection("policy")}
-          className={`px-4 py-2 rounded-lg border
+          className={`px-4 py-2 rounded-lg border cursor-pointer
           ${activeSection === "policy"
             ? "bg-blue-600 text-white"
             : "bg-gray-100 hover:bg-gray-200"}`}
@@ -41,7 +41,7 @@ export default function MoneyMarketContainer() {
 
         <button
           onClick={() => setActiveSection("exchange")}
-          className={`px-4 py-2 rounded-lg border
+          className={`px-4 py-2 rounded-lg border cursor-pointer
           ${activeSection === "exchange"
             ? "bg-blue-600 text-white"
             : "bg-gray-100 hover:bg-gray-200"}`}
@@ -51,7 +51,7 @@ export default function MoneyMarketContainer() {
 
         <button
           onClick={() => setActiveSection("money")}
-          className={`px-4 py-2 rounded-lg border
+          className={`px-4 py-2 rounded-lg border cursor-pointer
           ${activeSection === "money"
             ? "bg-blue-600 text-white"
             : "bg-gray-100 hover:bg-gray-200"}`}
@@ -61,7 +61,7 @@ export default function MoneyMarketContainer() {
 
         <button
           onClick={() => setActiveSection("deposit")}
-          className={`px-4 py-2 rounded-lg border
+          className={`px-4 py-2 rounded-lg border cursor-pointer
           ${activeSection === "deposit"
             ? "bg-blue-600 text-white"
             : "bg-gray-100 hover:bg-gray-200"}`}
@@ -74,66 +74,73 @@ export default function MoneyMarketContainer() {
       {/* FILTER BAR */}
       <div className="flex flex-wrap items-center gap-4 bg-white border rounded-xl p-4">
 
-        <div className="flex items-center gap-2">
-          <span className="text-sm font-medium">
-            Deposit Tenor:
-          </span>
+        {/* Deposit tenor chỉ dùng cho deposit */}
+        {activeSection === "deposit" && (
+          <div className="flex items-center gap-2">
+            <span className="text-sm font-medium">
+              Deposit Tenor:
+            </span>
 
-          {tenorOptions.map((t) => (
-            <button
-              key={t}
-              onClick={() => setDepositTenor(t)}
-              className={`px-3 py-1 rounded-lg border text-sm
-              ${depositTenor === t
-                ? "bg-blue-600 text-white"
-                : "bg-gray-100 hover:bg-gray-200"}
-              `}
-            >
-              {t}M
-            </button>
-          ))}
-        </div>
+            {tenorOptions.map((t) => (
+              <button
+                key={t}
+                onClick={() => setDepositTenor(t)}
+                className={`px-3 py-1 rounded-lg border text-sm
+                ${depositTenor === t
+                  ? "bg-blue-600 text-white"
+                  : "bg-gray-100 hover:bg-gray-200"}`}
+              >
+                {t}M
+              </button>
+            ))}
+          </div>
+        )}
 
-        <div className="flex items-center gap-2">
+        {/* Pagination chỉ dùng cho API có page */}
+        {activeSection !== "deposit" && (
+          <>
+            <div className="flex items-center gap-2">
 
-          <span className="text-sm font-medium">
-            Limit:
-          </span>
+              <span className="text-sm font-medium">
+                Limit:
+              </span>
 
-          <select
-            value={limit}
-            onChange={(e) => setLimit(Number(e.target.value))}
-            className="border rounded-lg px-2 py-1"
-          >
-            <option value={5}>5</option>
-            <option value={10}>10</option>
-            <option value={20}>20</option>
-            <option value={50}>50</option>
-          </select>
+              <select
+                value={limit}
+                onChange={(e) => setLimit(Number(e.target.value))}
+                className="border rounded-lg px-2 py-1"
+              >
+                <option value={5}>5</option>
+                <option value={10}>10</option>
+                <option value={20}>20</option>
+                <option value={50}>50</option>
+              </select>
 
-        </div>
+            </div>
 
-        <div className="flex items-center gap-2">
+            <div className="flex items-center gap-2">
 
-          <button
-            onClick={() => setPage((p) => Math.max(1, p - 1))}
-            className="px-3 py-1 border rounded-lg bg-gray-100 hover:bg-gray-200"
-          >
-            Prev
-          </button>
+              <button
+                onClick={() => setPage((p) => Math.max(1, p - 1))}
+                className="px-3 py-1 border rounded-lg bg-gray-100 hover:bg-gray-200"
+              >
+                Prev
+              </button>
 
-          <span className="text-sm">
-            Page {page}
-          </span>
+              <span className="text-sm">
+                Page {page}
+              </span>
 
-          <button
-            onClick={() => setPage((p) => p + 1)}
-            className="px-3 py-1 border rounded-lg bg-gray-100 hover:bg-gray-200"
-          >
-            Next
-          </button>
+              <button
+                onClick={() => setPage((p) => p + 1)}
+                className="px-3 py-1 border rounded-lg bg-gray-100 hover:bg-gray-200"
+              >
+                Next
+              </button>
 
-        </div>
+            </div>
+          </>
+        )}
 
       </div>
 
@@ -152,7 +159,7 @@ export default function MoneyMarketContainer() {
       )}
 
       {activeSection === "deposit" && (
-       <DepositRateSection kyHan={1} />
+        <DepositRateSection kyHan={depositTenor} />
       )}
 
     </div>

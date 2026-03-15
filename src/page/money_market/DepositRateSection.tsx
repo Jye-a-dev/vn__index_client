@@ -14,6 +14,10 @@ export default function DepositRateSection({ kyHan }: Props) {
   if (loading) return <p>Loading deposit rates...</p>;
   if (error) return <p>{error}</p>;
 
+  const rateMap = new Map(
+    data?.map((b) => [b.mack, b])
+  );
+
   return (
     <section className="bg-white border rounded-xl p-6">
 
@@ -25,17 +29,15 @@ export default function DepositRateSection({ kyHan }: Props) {
 
         {VN_BANKS.map((bank) => {
 
-          const apiBank = data.find(
-            (b) =>
-              b.bankCode?.toLowerCase() === bank.code.toLowerCase()
-          );
+          const apiBank = rateMap.get(bank.api_code);
 
-          const latestRate = apiBank?.interestRate ?? "N/A";
+          const latestRate =
+            apiBank?.data?.[0]?.[1] ?? "N/A";
 
           return (
             <div
               key={bank.code}
-              className="border rounded-lg p-4"
+              className="border rounded-lg p-4 hover:shadow transition"
             >
 
               <div className="font-semibold">
@@ -46,7 +48,7 @@ export default function DepositRateSection({ kyHan }: Props) {
                 {bank.code}
               </div>
 
-              <div className="mt-1">
+              <div className="mt-2 text-lg font-medium">
                 Latest Rate: {latestRate}%
               </div>
 

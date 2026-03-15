@@ -19,5 +19,20 @@ export const VN_BANKS = [
   { code: "OCB", name: "OCB", api_code: "OCB" },
   { code: "MSB", name: "MSB", api_code: "MSB" },
 
-  { code: "ABB", name: "ABBank", api_code: "ABB" }
+  { code: "ABB", name: "ABBank", api_code: "ABB" },
+
+  // thêm
+  { code: "SHB", name: "SHB", api_code: "SHB" },
+  { code: "BVB", name: "BaoViet Bank", api_code: "BVB" },
+  { code: "NAB", name: "Nam A Bank", api_code: "NAB" },
+  { code: "PGB", name: "PGBank", api_code: "PGB" },
+  { code: "SGB", name: "SaigonBank", api_code: "SGB" },
+  { code: "VBB", name: "VietBank", api_code: "VBB" },
+  { code: "KLB", name: "KienlongBank", api_code: "KLB" },
+  { code: "BAB", name: "Bac A Bank", api_code: "BAB" },
+
+  // ngân hàng nước ngoài
+  { code: "HSBC", name: "HSBC Vietnam", api_code: "HSBC" },
+  { code: "SCB", name: "Standard Chartered", api_code: "SCB" },
+  { code: "UOB", name: "UOB Vietnam", api_code: "UOB" }
 ];

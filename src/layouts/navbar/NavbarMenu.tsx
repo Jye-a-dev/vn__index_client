@@ -4,7 +4,6 @@ const menu = [
   { name: "Trang chủ", href: "/" },
   { name: "Trái phiếu", href: "/credit_market" },
   { name: "Tiền tệ", href: "/money_market" },
-  { name: "Cổ phiếu", href: "/stock_market" },
 ];
 
 export default function NavbarMenu() {

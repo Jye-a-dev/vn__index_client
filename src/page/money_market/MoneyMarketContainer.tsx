@@ -6,11 +6,9 @@ import PolicyRateSection from "./PolicyRateSection";
 import ExchangeRateSection from "./ExchangeRateSection";
 import MoneySupplySection from "./MoneySupplySection";
 import DepositRateSection from "./DepositRateSection";
-
 import FuelPriceSection from "./FuelPriceSection";
 import GoldPriceSection from "./GoldPriceSection";
 import GlobalCommoditySection from "./GlobalCommoditySection";
-import DomesticCommoditySection from "./DomesticCommoditySection";
 
 type Section =
   | "policy"
@@ -19,8 +17,17 @@ type Section =
   | "deposit"
   | "fuel"
   | "gold"
-  | "globalCommodity"
-  | "domesticCommodity";
+  | "globalCommodity";
+
+const SECTION_LABEL: Record<Section, string> = {
+  policy: "Policy Rates",
+  exchange: "Exchange Rate",
+  money: "Money Supply",
+  deposit: "Deposit Rates",
+  fuel: "Fuel Price",
+  gold: "Gold Price",
+  globalCommodity: "Global Commodity",
+};
 
 export default function MoneyMarketContainer() {
 
@@ -28,7 +35,8 @@ export default function MoneyMarketContainer() {
   const [page, setPage] = useState(1);
   const [limit, setLimit] = useState(10);
 
-  const [activeSection, setActiveSection] = useState<Section>("policy");
+  const [activeSection, setActiveSection] =
+    useState<Section>("policy");
 
   const tenorOptions = [1, 3, 6, 12];
 
@@ -40,116 +48,65 @@ export default function MoneyMarketContainer() {
       </h1>
 
       {/* SECTION SWITCH */}
+
       <div className="flex flex-wrap gap-2">
 
-        <button
-          onClick={() => setActiveSection("policy")}
-          className={`px-4 py-2 rounded-lg border
-          ${activeSection === "policy"
-            ? "bg-blue-600 text-white"
-            : "bg-gray-100 hover:bg-gray-200"}`}
-        >
-          Policy Rates
-        </button>
+        {Object.entries(SECTION_LABEL).map(
+          ([key, label]) => (
 
-        <button
-          onClick={() => setActiveSection("exchange")}
-          className={`px-4 py-2 rounded-lg border
-          ${activeSection === "exchange"
-            ? "bg-blue-600 text-white"
-            : "bg-gray-100 hover:bg-gray-200"}`}
-        >
-          Exchange Rate
-        </button>
+            <button
+              key={key}
+              onClick={() =>
+                setActiveSection(key as Section)
+              }
+              className={`px-4 py-2 rounded-lg border
+              ${activeSection === key
+                  ? "bg-blue-600 text-white"
+                  : "bg-gray-100 hover:bg-gray-200"}`}
+            >
+              {label}
+            </button>
 
-        <button
-          onClick={() => setActiveSection("money")}
-          className={`px-4 py-2 rounded-lg border
-          ${activeSection === "money"
-            ? "bg-blue-600 text-white"
-            : "bg-gray-100 hover:bg-gray-200"}`}
-        >
-          Money Supply
-        </button>
-
-        <button
-          onClick={() => setActiveSection("deposit")}
-          className={`px-4 py-2 rounded-lg border
-          ${activeSection === "deposit"
-            ? "bg-blue-600 text-white"
-            : "bg-gray-100 hover:bg-gray-200"}`}
-        >
-          Deposit Rates
-        </button>
-
-        <button
-          onClick={() => setActiveSection("fuel")}
-          className={`px-4 py-2 rounded-lg border
-          ${activeSection === "fuel"
-            ? "bg-blue-600 text-white"
-            : "bg-gray-100 hover:bg-gray-200"}`}
-        >
-          Fuel Price
-        </button>
-
-        <button
-          onClick={() => setActiveSection("gold")}
-          className={`px-4 py-2 rounded-lg border
-          ${activeSection === "gold"
-            ? "bg-blue-600 text-white"
-            : "bg-gray-100 hover:bg-gray-200"}`}
-        >
-          Gold Price
-        </button>
-
-        <button
-          onClick={() => setActiveSection("globalCommodity")}
-          className={`px-4 py-2 rounded-lg border
-          ${activeSection === "globalCommodity"
-            ? "bg-blue-600 text-white"
-            : "bg-gray-100 hover:bg-gray-200"}`}
-        >
-          Global Commodity
-        </button>
-
-        <button
-          onClick={() => setActiveSection("domesticCommodity")}
-          className={`px-4 py-2 rounded-lg border
-          ${activeSection === "domesticCommodity"
-            ? "bg-blue-600 text-white"
-            : "bg-gray-100 hover:bg-gray-200"}`}
-        >
-          Domestic Commodity
-        </button>
+          )
+        )}
 
       </div>
 
       {/* FILTER BAR */}
+
       <div className="flex flex-wrap items-center gap-4 bg-white border rounded-xl p-4">
 
         {activeSection === "deposit" && (
+
           <div className="flex items-center gap-2">
+
             <span className="text-sm font-medium">
               Deposit Tenor:
             </span>
 
             {tenorOptions.map((t) => (
+
               <button
                 key={t}
                 onClick={() => setDepositTenor(t)}
                 className={`px-3 py-1 rounded-lg border text-sm
                 ${depositTenor === t
-                  ? "bg-blue-600 text-white"
-                  : "bg-gray-100 hover:bg-gray-200"}`}
+                    ? "bg-blue-600 text-white"
+                    : "bg-gray-100 hover:bg-gray-200"}`}
               >
                 {t}M
               </button>
+
             ))}
+
           </div>
+
         )}
 
         {activeSection !== "deposit" && (
+
           <>
+
             <div className="flex items-center gap-2">
 
               <span className="text-sm font-medium">
@@ -158,7 +115,9 @@ export default function MoneyMarketContainer() {
 
               <select
                 value={limit}
-                onChange={(e) => setLimit(Number(e.target.value))}
+                onChange={(e) =>
+                  setLimit(Number(e.target.value))
+                }
                 className="border rounded-lg px-2 py-1"
               >
                 <option value={5}>5</option>
@@ -172,7 +131,9 @@ export default function MoneyMarketContainer() {
             <div className="flex items-center gap-2">
 
               <button
-                onClick={() => setPage((p) => Math.max(1, p - 1))}
+                onClick={() =>
+                  setPage((p) => Math.max(1, p - 1))
+                }
                 className="px-3 py-1 border rounded-lg bg-gray-100 hover:bg-gray-200"
               >
                 Prev
@@ -190,7 +151,9 @@ export default function MoneyMarketContainer() {
               </button>
 
             </div>
+
           </>
+
         )}
 
       </div>
@@ -218,15 +181,11 @@ export default function MoneyMarketContainer() {
       )}
 
       {activeSection === "gold" && (
-        <GoldPriceSection/>
+        <GoldPriceSection />
       )}
 
       {activeSection === "globalCommodity" && (
-        <GlobalCommoditySection page={page} limit={limit} />
-      )}
-
-      {activeSection === "domesticCommodity" && (
-        <DomesticCommoditySection page={page} limit={limit} />
+        <GlobalCommoditySection />
       )}
 
     </div>
